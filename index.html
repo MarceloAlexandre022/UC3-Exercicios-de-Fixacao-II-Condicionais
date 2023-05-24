@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 23/05/2023</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/bootstrap.bundle.min.js">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h1>Calculadora</h1>
+                <div class="p-3 bg-info bg-opacity-10 border border-info border-info rounded">                    
+                    <!-- Área do Círculo -->
+                    <h2>Área do Círculo</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="raioInput" class="form-control" placeholder="Raio">
+                        <button onclick="calcularAreaCirculo()" class="btn btn-primary">Calcular</button>
+                    </div>
+                    <div id="areaCirculoOutput"></div>
+                    <!-- Área do Retângulo -->
+                    <h2>Área do Retângulo</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="baseInput" class="form-control" placeholder="Base">
+                        <input type="number" id="alturaInput" class="form-control" placeholder="Altura">
+                        <button onclick="calcularAreaRetangulo()" class="btn btn-primary">Calcular</button>
+                    </div>
+                    <div id="areaRetanguloOutput"></div>
+
+                    <!-- Área do Triângulo -->
+                    <h2>Área do Triângulo</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="baseTrianguloInput" class="form-control" placeholder="Base">
+                        <input type="number" id="alturaTrianguloInput" class="form-control" placeholder="Altura">
+                        <button onclick="calcularAreaTriangulo()" class="btn btn-primary">Calcular</button>
+                    </div>
+                    
+                    <div id="areaTrianguloOutput"></div>
+                    <!-- Hipotenusa -->
+                    <h2>Hipotenusa</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="cateto1Input" class="form-control" placeholder="Cateto 1">
+                        <input type="number" id="cateto2Input" class="form-control" placeholder="Cateto 2">
+                        <button onclick="calcularHipotenusa()" class="btn btn-primary">Calcular</button>
+                    </div>
+                    <div id="hipotenusaOutput"></div>
+
+                    <!-- Baskhara -->
+                    <h2>Baskhara</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="aInput" class="form-control" placeholder="A">
+                        <input type="number" id="bInput" class="form-control" placeholder="B">
+                        <input type="number" id="cInput" class="form-control" placeholder="C">
+                        <button onclick="calcularBaskhara()" class="btn btn-primary">Calcular</button>
+                    </div>
+                    <div id="baskharaOutput"></div>
+
+                    <!-- Conversão de Moedas -->
+                    <h2>Conversão de Moedas</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="reaisInput" class="form-control" placeholder="Valor em Reais">
+                        <button onclick="converterMoedas()" class="btn btn-primary">Converter</button>
+                    </div>
+                    <div id="moedasOutput"></div>
+
+                    <!-- Conversão de Temperatura -->
+                    <h2>Conversão de Temperatura</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="celsiusInput" class="form-control"
+                            placeholder="Temperatura em Celsius">
+                        <button onclick="converterTemperatura()" class="btn btn-primary">Converter</button>
+                    </div>
+                    <div id="temperaturaOutput"></div>
+
+                    <!-- Conversão de Velocidade -->
+                    <h2>Conversão de Velocidade</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="kmhInput" class="form-control" placeholder="Velocidade em KM/H">
+                        <button onclick="converterVelocidade()" class="btn btn-primary">Converter</button>
+                    </div>
+                    <div id="velocidadeOutput"></div>
+
+                    <!-- Média Aritmética -->
+                    <h2>Média Aritmética</h2>
+                    <div class="input-group mb-3">
+                        <input type="number" id="nota1Input" class="form-control" placeholder="Nota 1">
+                        <input type="number" id="nota2Input" class="form-control" placeholder="Nota 2">
+                        <input type="number" id="nota3Input" class="form-control" placeholder="Nota 3">
+                        <button onclick="calcularMedia()" class="btn btn-primary">Calcular</button>
+                    </div>
+                    <div id="mediaOutput"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
