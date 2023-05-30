@@ -2,56 +2,160 @@
 <html lang="pt-br">
 
 <head>
+    <title>Faculdade Senac Goiás - Página Inicial</title>
     <meta charset="UTF-8">
+    <meta name="description"
+        content="A Faculdade Senac Goiás oferece cursos superiores voltados para atender as demandas da modernidade tecnológica e do mundo do trabalho. ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atividade 23/05/2023</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        .result-container {
-            background-color: #e7f1ff;
-            padding: 20px;
-            color: black;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-        }
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,width=device-width">
 
-        .result-container.desfavoravel {
-            background-color: #ffcccc;
-            border-color: #ff3333;
-        }
-    </style>
-    <script src="js/script.js"></script>
+    <!-- shortcut -->
+    <meta name="author" content="Faculdade de Tecnologia Senac Goiás, @facsenacgoias">
+    <meta name="generator" content="HTML-Kit 292">
+    <meta name="robots" content="all">
+    <link rel="shortcut icon" href="http://www.go.senac.br/portal/assets/img/favicon.png" />
+
+    <!-- Facebook meta tags configuration -->
+    <meta property="og:title" content="Faculdade Senac Goiás" />
+    <meta property="og:site_name" content="Faculdade Senac Goiás" />
+    <meta property="og:image" content="https://v1.go.senac.br/faculdade/site/statics/site/img/logo211x124.jpg" />
+    <meta property="og:description"
+        content="A Faculdade Senac Goiás oferece cursos superiores voltados para atender as demandas da modernidade tecnológica e do mundo do trabalho. " />
+
+    <script src="https://v1.go.senac.br/faculdade/site/statics/site/assets/dest/js/modernizr.custom.js"></script>
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,400,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- styles -->
+    <link rel="stylesheet" media="all"
+        href="https://v1.go.senac.br/faculdade/site/statics/site/assets/dest/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all"
+        href="https://v1.go.senac.br/faculdade/site/statics/site/assets/dest/third/lightbox/css/lightbox.min.css" />
+    <link rel="stylesheet" media="all"
+        href="https://v1.go.senac.br/faculdade/site/statics/site/assets/dest/third/mmenu/jquery.mmenu.all.css" />
+    <link rel="stylesheet" media="all"
+        href="https://v1.go.senac.br/faculdade/site/statics/site/assets/dest/third/owl-carousel/owl.carousel.css" />
+    <link rel="stylesheet" media="all"
+        href="https://v1.go.senac.br/faculdade/site/statics/site/assets/dest/css/estilos.css" />
 </head>
+<header id="cabecalho">
 
-<body>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <h1>Requisitos</h1>
-                <div class="p-3 bg-info bg-opacity-10 border border-info border-info rounded">
-                    <!-- Formulário -->
-                    <h2>Formulário de Matrícula</h2>
-                    <div class="input-group mb-3">
-                        <label for="aInput">Data Nasc.</label>
-                        <input type="date" id="aInput" class="form-control">
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="bInput">Renda Percápta</label>
-                        <input type="number" id="bInput" class="form-control" placeholder="Renda Percápta">
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="cInput">Qtos moradores</label>
-                        <input type="number" id="cInput" class="form-control" placeholder="Qtos moradores">
-                        <button onclick="calcularAdmissao()" class="btn btn-primary">Calcular</button>
+    <div id="acesso-rapido" class="hidden-xs">
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-6 col-lg-6">
+                            <span class="icon left">
+                                <i class="xs mail"></i>
+                                atendimento@go.senac.br
+                            </span>
+                            <span class="icon left visible-lg" style="margin-left: 40px; ">
+                                <i class="xs mail"></i>
+                                <a href="https://v1.go.senac.br/faculdade/site/contato"> Canal Aberto </a>
+                            </span>
+                            <span id="acesso-rapido__telefone" class="icon left hidden-sm">
+                                <i class="xs phone"></i>
+                                (62) 3309-6300
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-lg-offset-0">
+                            <a href="https://aluno.go.senac.br/" id="acesso-rapido__portal" class="xs icon left"
+                                target="_blank">
+                                <i class="xs portal-do-aluno"></i>
+                                acesse o portal do aluno
+                            </a>
+                            <ul id="acesso-rapido__redes-sociais" class="left">
+                                <li><a href="https://www.facebook.com/facsenacgo/" target="_blank" class="facebook"
+                                        title="Siga-nos no Facebook"></a></li>
+                                <li><a href="https://www.twitter.com/facsenacgo/" target="_blank" class="twitter"
+                                        title="Siga-nos no Twitter"></a></li>
+                                <li><a href="https://www.instagram.com/senacgoias/" target="_blank" class="instagram"
+                                        title="Siga-nos no Instagram"></a></li>
+                                <li><a href="https://www.youtube.com/facsenacgoias" target="_blank" class="youtube"></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div id="resultado" class="result-container mt-3"></div>
+            </div>
+        </section>
+    </div>
+    <section id="principal">
+        <div class="container">
+            <div class="row">
+                <h1 id="principal__logo" class="col-xs-5 col-sm-2 col-md-2 col-lg-2">
+                    <a href="https://v1.go.senac.br/faculdade/site/"><img
+                            src="https://v1.go.senac.br/faculdade/site/statics/site/assets/dest/img/logo.png"
+                            alt="Logo Faculdade Senac" title="Faculdade Senac" /></a>
+                </h1>
+                <div class="col-xs-4 visible-xs pull-right">
+                    <a href="#menu-mobile" id="principal__btn-menu-mobile" class="btn btn-default"> <span
+                            class="glyphicon glyphicon-menu-hamburger"> </span> menu </a>
+                </div>
+                <hr class="principal__borda" />
+            </div>
+    </section>
+</header>
+
+<body>
+    <section>
+        <ul>
+            <li><a href="../Atividade-25-05-2023/pages/index1.html">Link para verificação de requisitos para Matrícula</a></li>
+        </ul>
+        
+    </section>
+</body>
+<footer class="text-white text-center text-lg-start" style="background-color: #dbd0b0;">
+    <div class="container p-1">
+        <div class="row mt-4">
+            <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                <nav class="row span3 nav">
+                    <h2>Localização</h2>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15291.264758575744!2d-49.2363355!3d-16.6359917!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ef250d5f74183%3A0x78e6118444fcfc2e!2sFaculdade%20Senac%20Goi%C3%A1s%20-%20Sede!5e0!3m2!1spt-BR!2sbr!4v1685389188309!5m2!1spt-BR!2sbr"
+                        width="400" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="span3">
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4 pb-1">Buscar </h5>
+                <div class="form-outline form-white mb-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" />
+                    <label class="form-label" for="formControlLg"></label>
+                </div>
+                <ul class="fa-ul" style="margin-left: 1.65em;">
+                    <li class="mb-3">
+                        <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">Av. Gen. Rodrigo
+                            Octávio
+                            Av. Caiapó, Qd. 89, Lt. 41/49, nº 909 - St. Santa Genoveva Goiânia-GO CEP: 4672-400 Fone:
+                            (62) 3309-6300</span>
+                    </li>
+                    <li class="mb-3">
+                        <span class="fa-li"><i class="fas fa-envelope"></i></span><span
+                            class="ms-2">www.go.senac.br/faculdader</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4">Horário de Atendimento</h5>
+                <table class="table text-center text-white">
+                    <tbody class="font-weight-normal">
+                        <tr>
+                            <td>Segunda - Sexta:</td>
+                            <td>8:00 as 18:00</td>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-
-    <script src="js/script.js"></script>
-</body>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright: Marcelo Alexandre
+    </div>
+</footer>
 
 </html>
