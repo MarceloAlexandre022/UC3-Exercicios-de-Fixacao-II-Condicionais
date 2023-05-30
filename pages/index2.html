@@ -130,10 +130,11 @@
         const dataAtual = new Date();
         const ano = dataAtual.getFullYear();
         const mes = dataAtual.getMonth() + 1; // Os meses são indexados em 0, por isso é necessário adicionar 1
-        const diasNoMes = new Date(ano, mes, 0).getDate(); // Obter o número de dias no mês atual
+
+        let contadorDiasAula = 0;
 
         // Criar as células da tabela para cada dia útil do mês
-        for (let dia = 1; dia <= diasNoMes; dia++) {
+        for (let dia = 1; contadorDiasAula < 12; dia++) {
             const data = new Date(ano, mes - 1, dia);
             const diaDaSemana = data.getDay();
 
@@ -172,45 +173,20 @@
                 row.appendChild(cellAusencia);
 
                 tbody.appendChild(row);
+
+                contadorDiasAula++;
             }
         }
 
         // Função para calcular a frequência
         function calcularFrequencia() {
-            const presencas = document.getElementsByClassName('btn-presenca').length;
-            const totalDiasUteis = document.getElementsByClassName('btn-presenca').length + document.getElementsByClassName('btn-ausencia').length;
-            const frequencia = (presencas / totalDiasUteis) * 100;
-            const frequenciaResultado = document.getElementById('frequencia-resultado');
-            frequenciaResultado.textContent = frequencia.toFixed(2);
+            const presencas = tabelaPresencas.querySelectorAll('.btn-presenca').length;
+            const ausencias = tabelaPresencas.querySelectorAll('.btn-ausencia').length;
+            const totalAulas = presencas + ausencias;
+            const frequencia = (presencas / totalAulas) * 100;
+
+            document.getElementById('frequencia-resultado').textContent = frequencia.toFixed(2);
         }
-
-        // Função para calcular a média e a situação
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const nota1 = parseFloat(document.getElementById('nota1').value);
-            const nota2 = parseFloat(document.getElementById('nota2').value);
-            const nota3 = parseFloat(document.getElementById('nota3').value);
-            const nota4 = parseFloat(document.getElementById('nota4').value);
-            const frequencia = parseFloat(document.getElementById('frequencia').value);
-
-            const media = (nota1 + nota2 + nota3 + nota4) / 4;
-
-            const situacao = document.getElementById('situacao');
-
-            if (media >= 6 && frequencia >= 75) {
-                situacao.textContent = 'Aprovado';
-                situacao.className = 'resultado-aprovado';
-            } else {
-                situacao.textContent = 'Reprovado';
-                situacao.className = 'resultado-reprovado';
-            }
-
-            const mediaElement = document.getElementById('media');
-            mediaElement.textContent = media.toFixed(2);
-
-            calcularFrequencia();
-        });
     </script>
 </body>
 
