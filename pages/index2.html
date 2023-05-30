@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<link rel="stylesheet" href="../js/script.js">
+<head>
+    <title>Registro de Presenças</title>
+    <style>
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .btn-presenca,
+        .btn-ausencia {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .btn-presenca {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-ausencia {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .bordered-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .resultado-aprovado {
+            color: green;
+        }
+
+        .resultado-reprovado {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registro de Presenças</h1>
+
+        <div class="bordered-box">
+            <h2>Informações do Aluno</h2>
+            <form>
+                <label for="nome">Nome do Aluno:</label>
+                <input type="text" id="nome" name="nome" required>
+                <br><br>
+                <label for="nota1">Nota 1:</label>
+                <input type="number" id="nota1" name="nota1" min="0" max="10" step="0.1" required>
+                <br><br>
+                <label for="nota2">Nota 2:</label>
+                <input type="number" id="nota2" name="nota2" min="0" max="10" step="0.1" required>
+                <br><br>
+                <label for="nota3">Nota 3:</label>
+                <input type="number" id="nota3" name="nota3" min="0" max="10" step="0.1" required>
+                <br><br>
+                <label for="nota4">Nota 4:</label>
+                <input type="number" id="nota4" name="nota4" min="0" max="10" step="0.1" required>
+                <br><br>
+                <label for="frequencia">Frequência (%):</label>
+                <input type="number" id="frequencia" name="frequencia" min="0" max="100" step="1" required>
+                <br><br>
+                <input type="submit" value="Calcular Média e Situação">
+            </form>
+        </div>
+
+        <div class="bordered-box">
+            <h2>Resultado</h2>
+            <p>
+                Média: <span id="media"></span>
+            </p>
+            <p>
+                Frequência: <span id="frequencia-resultado"></span>%
+            </p>
+            <p>
+                Situação: <span id="situacao"></span>
+            </p>
+        </div>
+
+        <div class="bordered-box">
+            <h2>Registro de Presenças/Ausências</h2>
+            <table id="tabela-presencas">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>P</th>
+                        <th>A</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Os dados das presenças/ausências serão adicionados dinamicamente aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const tabelaPresencas = document.getElementById('tabela-presencas');
+        const tbody = tabelaPresencas.querySelector('tbody');
+
+        // Obter a data atual
+        const dataAtual = new Date();
+        const ano = dataAtual.getFullYear();
+        const mes = dataAtual.getMonth() + 1; // Os meses são indexados em 0, por isso é necessário adicionar 1
+        const diasNoMes = new Date(ano, mes, 0).getDate(); // Obter o número de dias no mês atual
+
+        // Criar as células da tabela para cada dia útil do mês
+        for (let dia = 1; dia <= diasNoMes; dia++) {
+            const data = new Date(ano, mes - 1, dia);
+            const diaDaSemana = data.getDay();
+
+            // Verificar se o dia é um dia útil (de segunda a sexta-feira)
+            if (diaDaSemana >= 1 && diaDaSemana <= 5) {
+                const row = document.createElement('tr');
+
+                const cellData = document.createElement('td');
+                cellData.textContent = `${dia}/${mes}/${ano}`;
+                row.appendChild(cellData);
+
+                const cellPresenca = document.createElement('td');
+                const btnPresenca = document.createElement('button');
+                btnPresenca.textContent = 'P';
+                btnPresenca.classList.add('btn-presenca');
+                btnPresenca.addEventListener('click', () => {
+                    btnPresenca.textContent = 'X';
+                    btnPresenca.classList.remove('btn-presenca');
+                    btnPresenca.classList.add('btn-ausencia');
+                    calcularFrequencia();
+                });
+                cellPresenca.appendChild(btnPresenca);
+                row.appendChild(cellPresenca);
+
+                const cellAusencia = document.createElement('td');
+                const btnAusencia = document.createElement('button');
+                btnAusencia.textContent = 'A';
+                btnAusencia.classList.add('btn-ausencia');
+                btnAusencia.addEventListener('click', () => {
+                    btnAusencia.textContent = 'X';
+                    btnAusencia.classList.remove('btn-ausencia');
+                    btnAusencia.classList.add('btn-presenca');
+                    calcularFrequencia();
+                });
+                cellAusencia.appendChild(btnAusencia);
+                row.appendChild(cellAusencia);
+
+                tbody.appendChild(row);
+            }
+        }
+
+        // Função para calcular a frequência
+        function calcularFrequencia() {
+            const presencas = document.getElementsByClassName('btn-presenca').length;
+            const totalDiasUteis = document.getElementsByClassName('btn-presenca').length + document.getElementsByClassName('btn-ausencia').length;
+            const frequencia = (presencas / totalDiasUteis) * 100;
+            const frequenciaResultado = document.getElementById('frequencia-resultado');
+            frequenciaResultado.textContent = frequencia.toFixed(2);
+        }
+
+        // Função para calcular a média e a situação
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nota1 = parseFloat(document.getElementById('nota1').value);
+            const nota2 = parseFloat(document.getElementById('nota2').value);
+            const nota3 = parseFloat(document.getElementById('nota3').value);
+            const nota4 = parseFloat(document.getElementById('nota4').value);
+            const frequencia = parseFloat(document.getElementById('frequencia').value);
+
+            const media = (nota1 + nota2 + nota3 + nota4) / 4;
+
+            const situacao = document.getElementById('situacao');
+
+            if (media >= 6 && frequencia >= 75) {
+                situacao.textContent = 'Aprovado';
+                situacao.className = 'resultado-aprovado';
+            } else {
+                situacao.textContent = 'Reprovado';
+                situacao.className = 'resultado-reprovado';
+            }
+
+            const mediaElement = document.getElementById('media');
+            mediaElement.textContent = media.toFixed(2);
+
+            calcularFrequencia();
+        });
+    </script>
+</body>
+
+</html>
