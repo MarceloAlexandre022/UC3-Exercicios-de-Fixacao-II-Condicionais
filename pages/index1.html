@@ -25,7 +25,48 @@
             border-color: #ff3333;
         }
     </style>
-    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calcularBtn = document.getElementById('calcularBtn');
+            calcularBtn.addEventListener('click', function() {
+                calcularAdmissao();
+            });
+        });
+
+        function calcularAdmissao() {
+            let idadeInput = document.getElementById('idadeInput');
+            let rendaInput = document.getElementById('rendaInput');
+            let moradoresInput = document.getElementById('moradoresInput');
+
+            let idade = idadeInput.value;
+            let renda = parseFloat(rendaInput.value);
+            let moradores = parseInt(moradoresInput.value);
+
+            const hoje = new Date();
+            const nasc = new Date(idade);
+            let idadeconver = hoje.getFullYear() - nasc.getFullYear();
+
+            let rendapercapita = renda / moradores;
+
+            let resultadoDiv = document.getElementById('resultado');
+
+            if (idadeconver >= 16 && rendapercapita <= 1.5) {
+                resultadoDiv.innerHTML = `Bem Vindo ao PSG. (0800-777-3622) Sua idade é ${idadeconver} anos.`;
+                resultadoDiv.classList.remove('desfavoravel');
+                resultadoDiv.classList.add('favoravel');
+            } else if (idadeconver < 16) {
+                resultadoDiv.innerHTML = "Você Não Tem Idade Suficiente.";
+                resultadoDiv.classList.remove('favoravel', 'desfavoravel');
+            } else if (rendapercapita > 1.5) {
+                resultadoDiv.innerHTML = `Você Ultrapassou O Limite Da Renda Per Capita. Sua idade é ${idadeconver} anos.`;
+                resultadoDiv.classList.remove('favoravel');
+                resultadoDiv.classList.add('desfavoravel');
+            } else {
+                resultadoDiv.innerHTML = "Preencha Algum Campo.";
+                resultadoDiv.classList.remove('favoravel', 'desfavoravel');
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -37,17 +78,17 @@
                     <!-- Formulário -->
                     <h2>Formulário de Matrícula</h2>
                     <div class="input-group mb-3">
-                        <label for="aInput">Data Nasc.</label>
-                        <input type="date" id="aInput" class="form-control">
+                        <label for="idadeInput">Data Nasc.</label>
+                        <input type="date" id="idadeInput" class="form-control">
                     </div>
                     <div class="input-group mb-3">
-                        <label for="bInput">Renda Percápta</label>
-                        <input type="number" id="bInput" class="form-control" placeholder="Renda Percápta">
+                        <label for="rendaInput">Renda Percápta</label>
+                        <input type="number" id="rendaInput" class="form-control" placeholder="Renda Percápta">
                     </div>
                     <div class="input-group mb-3">
-                        <label for="cInput">Qtos moradores</label>
-                        <input type="number" id="cInput" class="form-control" placeholder="Qtos moradores">
-                        <button onclick="calcularAdmissao()" class="btn btn-primary">Calcular</button>
+                        <label for="moradoresInput">Qtos moradores</label>
+                        <input type="number" id="moradoresInput" class="form-control" placeholder="Qtos moradores">
+                        <button id="calcularBtn" class="btn btn-primary">Calcular</button>
                     </div>
                 </div>
                 <div id="resultado" class="result-container mt-3"></div>

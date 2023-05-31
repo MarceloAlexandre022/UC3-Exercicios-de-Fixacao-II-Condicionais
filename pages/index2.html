@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<link rel="stylesheet" href="../js/script.js">
+
 <head>
     <title>Registro de Presenças</title>
     <style>
@@ -55,10 +55,14 @@
 
         .resultado-aprovado {
             color: green;
+            font-weight: bold;
+            border: 2px solid green;
         }
 
         .resultado-reprovado {
             color: red;
+            font-weight: bold;
+            border: 2px solid red;
         }
     </style>
 </head>
@@ -69,7 +73,7 @@
 
         <div class="bordered-box">
             <h2>Informações do Aluno</h2>
-            <form>
+            <form id="formRegistro">
                 <label for="nome">Nome do Aluno:</label>
                 <input type="text" id="nome" name="nome" required>
                 <br><br>
@@ -123,6 +127,38 @@
     </div>
 
     <script>
+        document.getElementById('formRegistro').addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            // Obter os valores dos campos do formulário
+            const nome = document.getElementById('nome').value;
+            const nota1 = parseFloat(document.getElementById('nota1').value);
+            const nota2 = parseFloat(document.getElementById('nota2').value);
+            const nota3 = parseFloat(document.getElementById('nota3').value);
+            const nota4 = parseFloat(document.getElementById('nota4').value);
+            const frequencia = parseFloat(document.getElementById('frequencia').value);
+
+            // Calcular a média
+            const media = (nota1 + nota2 + nota3 + nota4) / 4;
+
+            // Verificar a situação
+            let situacao;
+            if (media >= 7 && frequencia >= 75) {
+                situacao = 'Aprovado';
+                document.getElementById('situacao').classList.remove('resultado-reprovado');
+                document.getElementById('situacao').classList.add('resultado-aprovado');
+            } else {
+                situacao = 'Reprovado';
+                document.getElementById('situacao').classList.remove('resultado-aprovado');
+                document.getElementById('situacao').classList.add('resultado-reprovado');
+            }
+
+            // Atualizar os elementos de resultado
+            document.getElementById('media').textContent = media.toFixed(2);
+            document.getElementById('frequencia-resultado').textContent = frequencia.toFixed(2);
+            document.getElementById('situacao').textContent = situacao;
+        });
+
         const tabelaPresencas = document.getElementById('tabela-presencas');
         const tbody = tabelaPresencas.querySelector('tbody');
 
@@ -132,6 +168,13 @@
         const mes = dataAtual.getMonth() + 1; // Os meses são indexados em 0, por isso é necessário adicionar 1
 
         let contadorDiasAula = 0;
+        let presencas = 0;
+
+        // Função para calcular o percentual de presença
+        function calcularPercentualPresenca() {
+            const percentual = (presencas / contadorDiasAula) * 100;
+            return percentual.toFixed(2);
+        }
 
         // Criar as células da tabela para cada dia útil do mês
         for (let dia = 1; contadorDiasAula < 12; dia++) {
@@ -147,45 +190,39 @@
                 row.appendChild(cellData);
 
                 const cellPresenca = document.createElement('td');
-                const btnPresenca = document.createElement('button');
-                btnPresenca.textContent = 'P';
-                btnPresenca.classList.add('btn-presenca');
-                btnPresenca.addEventListener('click', () => {
-                    btnPresenca.textContent = 'X';
-                    btnPresenca.classList.remove('btn-presenca');
-                    btnPresenca.classList.add('btn-ausencia');
-                    calcularFrequencia();
+                const inputPresenca = document.createElement('input');
+                inputPresenca.type = 'radio';
+                inputPresenca.name = `presenca_${dia}`;
+                inputPresenca.value = 'P';
+                inputPresenca.addEventListener('change', function () {
+                    if (this.checked) {
+                        presencas++;
+                        const percentualPresenca = calcularPercentualPresenca();
+                        document.getElementById('frequencia-resultado').textContent = percentualPresenca;
+                    }
                 });
-                cellPresenca.appendChild(btnPresenca);
+                cellPresenca.appendChild(inputPresenca);
                 row.appendChild(cellPresenca);
 
                 const cellAusencia = document.createElement('td');
-                const btnAusencia = document.createElement('button');
-                btnAusencia.textContent = 'A';
-                btnAusencia.classList.add('btn-ausencia');
-                btnAusencia.addEventListener('click', () => {
-                    btnAusencia.textContent = 'X';
-                    btnAusencia.classList.remove('btn-ausencia');
-                    btnAusencia.classList.add('btn-presenca');
-                    calcularFrequencia();
+                const inputAusencia = document.createElement('input');
+                inputAusencia.type = 'radio';
+                inputAusencia.name = `presenca_${dia}`;
+                inputAusencia.value = 'A';
+                inputAusencia.addEventListener('change', function () {
+                    if (this.checked) {
+                        presencas--;
+                        const percentualPresenca = calcularPercentualPresenca();
+                        document.getElementById('frequencia-resultado').textContent = percentualPresenca;
+                    }
                 });
-                cellAusencia.appendChild(btnAusencia);
+                cellAusencia.appendChild(inputAusencia);
                 row.appendChild(cellAusencia);
 
                 tbody.appendChild(row);
 
                 contadorDiasAula++;
             }
-        }
-
-        // Função para calcular a frequência
-        function calcularFrequencia() {
-            const presencas = tabelaPresencas.querySelectorAll('.btn-presenca').length;
-            const ausencias = tabelaPresencas.querySelectorAll('.btn-ausencia').length;
-            const totalAulas = presencas + ausencias;
-            const frequencia = (presencas / totalAulas) * 100;
-
-            document.getElementById('frequencia-resultado').textContent = frequencia.toFixed(2);
         }
     </script>
 </body>
