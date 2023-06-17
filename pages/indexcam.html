@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acesso à Câmera do Celular</title>
+    <style>
+        #canvas {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Acesso à Câmera do Celular</h1>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+
+        // Solicitar acesso à câmera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                var videoElement = document.createElement('video');
+                videoElement.srcObject = stream;
+                videoElement.autoplay = true;
+
+                // Quando o vídeo está pronto, desenha no canvas
+                videoElement.onloadedmetadata = function () {
+                    canvas.width = videoElement.videoWidth;
+                    canvas.height = videoElement.videoHeight;
+
+                    setInterval(function () {
+                        context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                    }, 16);
+                };
+            })
+            .catch(function (error) {
+                console.log('Erro ao acessar a câmera:', error);
+            });
+    </script>
+</body>
+</html>
